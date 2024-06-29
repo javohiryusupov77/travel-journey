@@ -9,7 +9,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  animation: gradientShift 5s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 code {
@@ -40,6 +55,7 @@ code {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -48,6 +64,7 @@ code {
 h1 {
   margin-bottom: 20px;
   animation: slideDown 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes slideDown {
@@ -55,6 +72,7 @@ h1 {
     transform: translateY(-50px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -71,6 +89,7 @@ h2 {
     transform: translateY(50px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -90,6 +109,7 @@ li {
   padding: 10px;
   border-radius: 5px;
   transition: transform 0.3s, background 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 li:hover {
@@ -111,6 +131,21 @@ input:focus {
   border-color: #61dafb;
   box-shadow: 0 0 5px #61dafb;
   outline: none;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 5px #61dafb;
+  }
+
+  50% {
+    box-shadow: 0 0 20px #61dafb;
+  }
+
+  100% {
+    box-shadow: 0 0 5px #61dafb;
+  }
 }
 
 button {
@@ -122,7 +157,22 @@ button {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+    margin-left: 10px;
   transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 button:hover {
@@ -132,4 +182,9 @@ button:hover {
 
 button:active {
   transform: translateY(1px);
+}
+
+button:focus {
+  outline: none;
+  animation: pulse 1s infinite;
 }

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
+import Swal from "sweetalert2";
 
 function App() {
   const [destinations, setDestinations] = useState([
     { id: 1, name: "Paris", description: "City of Light" },
-    { id: 2, name: "Tokyo", description: "Land of the Rising Sun" },
+    { id: 4, name: "Rome", description: "The Eternal City" },
+    { id: 5, name: "Sydney", description: "Harbour City" },
+    { id: 6, name: "Cape Town", description: "Mother City" },
   ]);
+  const storageDestinantion = JSON.stringify(destinations);
+  localStorage.setItem("destinations", storageDestinantion);
 
   const [newDestination, setNewDestination] = useState({
     name: "",
@@ -21,6 +26,15 @@ function App() {
   };
 
   const handleAddDestination = () => {
+    if (!newDestination.name || !newDestination.description) {
+      Swal.fire({
+        title: "Error",
+        text: "Fill out the all space",
+        icon: "question",
+      });
+      return;
+    }
+
     if (editMode) {
       setDestinations(
         destinations.map((destination) =>
@@ -41,6 +55,23 @@ function App() {
   };
 
   const handleDeleteDestination = (id) => {
+    Swal.fire({
+      title: "Your travel place has been deleted",
+      showClass: {
+        popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `,
+      },
+      hideClass: {
+        popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `,
+      },
+    });
     setDestinations(
       destinations.filter((destination) => destination.id !== id)
     );
@@ -78,7 +109,6 @@ function App() {
         <div>
           <h2>{editMode ? "Edit Destination" : "Add New Destination"}</h2>
           <input
-            required
             type="text"
             name="name"
             placeholder="Destination Name"
@@ -86,7 +116,6 @@ function App() {
             onChange={handleInputChange}
           />
           <input
-            required
             type="text"
             name="description"
             placeholder="Description"
