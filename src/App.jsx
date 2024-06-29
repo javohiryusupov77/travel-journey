@@ -29,7 +29,7 @@ function App() {
     if (!newDestination.name || !newDestination.description) {
       Swal.fire({
         title: "Error",
-        text: "Fill out the all space",
+        text: "Occupy all the space",
         icon: "question",
       });
       return;
